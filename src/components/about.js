@@ -9,14 +9,10 @@ export function renderAbout({ profile, about }) {
   const { bio, philosophy, philosophyTranslation, currentFocus, education } = about;
 
   // Photo
-  const photoCol = qs('#about-photo-col');
-  if (photoCol) {
-    const resolvedPhoto = resolveAsset(photo);
-    photoCol.innerHTML = `
-      <img src="${esc(resolvedPhoto)}" alt="${esc(name)}"
-           style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(28,28,28,0.3) 0%, transparent 60%);"></div>
-    `;
+  const photoImg = qs('#about-photo');
+  if (photoImg) {
+    photoImg.src = resolveAsset(photo);
+    photoImg.alt = name;
   }
 
   // Content
@@ -27,7 +23,6 @@ export function renderAbout({ profile, about }) {
     { label: 'LinkedIn',  href: social.linkedin,  external: true  },
     { label: 'GitHub',    href: social.github,    external: true  },
     { label: 'Instagram', href: social.instagram, external: true  },
-    { label: 'Email',     href: `mailto:${email}`, external: false },
   ].filter((l) => l.href);
 
   content.innerHTML = `
@@ -61,22 +56,18 @@ export function renderAbout({ profile, about }) {
             CV/Resume ${ARROW}
           </a>` : ''}
 
-        ${socialLinks.map((l) => {
-          if (l.label === 'Email') {
-            return `
-              <button type="button" class="btn-copy-email link-underline" data-email="${esc(email)}"
-                      style="background:none;border:none;padding:0;font-size:0.8125rem;color:var(--charcoal);cursor:pointer;display:inline-flex;align-items:center;gap:0.3rem;"
-                      title="Click to copy email address">
-                Email 📋
-              </button>
-            `;
-          }
-          return `
-            <a href="${esc(l.href)}" ${l.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
-               class="link-underline" style="font-size:0.8125rem;">
-              ${esc(l.label)} ${ARROW}
-            </a>`;
-        }).join('')}
+        ${socialLinks.map((l) => `
+          <a href="${esc(l.href)}" ${l.external ? 'target="_blank" rel="noopener noreferrer"' : ''}
+             class="link-underline" style="font-size:0.8125rem;">
+            ${esc(l.label)} ${ARROW}
+          </a>
+        `).join('')}
+
+        <button type="button" class="btn-copy-email link-underline" data-email="${esc(email)}"
+                style="background:none;border:none;padding:0;font-size:0.8125rem;color:var(--charcoal);cursor:pointer;display:inline-flex;align-items:center;"
+                title="Click to copy email address">
+          Copy Email ${ARROW}
+        </button>
       </div>
     </div>
 

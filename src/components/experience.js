@@ -5,14 +5,14 @@ import { qs, esc } from '../utils/dom.js';
 import { resolveAsset } from '../utils/assets.js';
 
 export function renderExperience(experiences) {
-  const list = qs('#exp-list');
+  const list = qs('#experience-list');
   if (!list) return;
 
   list.innerHTML = experiences.map((exp, i) => {
     const hasImages = exp.images && exp.images.length > 0;
     return `
     <div class="exp-row reveal reveal-delay-${Math.min(i + 1, 5)}"
-         style="display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;">
+         style="display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;padding:2rem 0;border-bottom:1px solid var(--border);">
 
       <!-- Left: Role, Org, Period -->
       <div>

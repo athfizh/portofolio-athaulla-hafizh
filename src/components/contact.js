@@ -14,29 +14,29 @@ export function renderContact(profile) {
 
   const links = qs('#contact-links');
   if (links) {
-    const style = 'color:#FAF8F4;border-color:#555;font-size:0.9rem;';
     links.innerHTML = `
-      <div style="display:inline-flex;align-items:center;gap:0.4rem;">
+      <div style="display:inline-flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
         <a href="mailto:${esc(email)}" class="link-underline"
-           style="color:#FAF8F4;border-color:#FAF8F4;font-size:0.9rem;">
+           style="color:var(--contact-text);border-color:var(--contact-text);font-size:0.9rem;">
           ${esc(email)} ${ARROW}
         </a>
         <button type="button" class="btn-copy-email" data-email="${esc(email)}" title="Copy email address"
-                style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
-                       border-radius:4px;color:#FAF8F4;cursor:pointer;padding:2px 6px;font-size:0.6875rem;">
-          Copy
+                style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+                       border-radius:4px;color:var(--contact-text);cursor:pointer;padding:3px 8px;font-size:0.75rem;
+                       transition:background 0.2s;">
+          Copy Email
         </button>
       </div>
       <a href="${esc(social.linkedin)}" target="_blank" rel="noopener noreferrer"
-         class="link-underline" style="${style}">LinkedIn ${ARROW}</a>
+         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">LinkedIn ${ARROW}</a>
       <a href="${esc(social.github)}" target="_blank" rel="noopener noreferrer"
-         class="link-underline" style="${style}">GitHub ${ARROW}</a>
+         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">GitHub ${ARROW}</a>
       ${social.instagram ? `
       <a href="${esc(social.instagram)}" target="_blank" rel="noopener noreferrer"
-         class="link-underline" style="${style}">Instagram ${ARROW}</a>` : ''}
+         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">Instagram ${ARROW}</a>` : ''}
       ${resume ? `
       <a href="${esc(resume)}" target="_blank" rel="noopener noreferrer"
-         class="link-underline" style="${style}">CV/Resume ${ARROW}</a>` : ''}
+         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">CV/Resume ${ARROW}</a>` : ''}
     `;
   }
 }

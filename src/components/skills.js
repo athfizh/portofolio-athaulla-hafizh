@@ -4,20 +4,19 @@
 import { qs, esc, ARROW } from '../utils/dom.js';
 
 export function renderSkills(capabilities, certifications) {
-  // Capabilities Grid
-  const capGrid = qs('#capabilities-grid');
-  if (capGrid) {
-    capGrid.innerHTML = capabilities.map((c, i) => `
-      <div class="reveal reveal-delay-${Math.min(i + 1, 5)}">
-        <p class="meta-tag" style="margin-bottom:0.75rem;">${esc(c.area.toUpperCase())}</p>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.375rem;">
+  // Capabilities List
+  const capList = qs('#capabilities-list');
+  if (capList) {
+    capList.innerHTML = capabilities.map((c, i) => `
+      <div class="capability-group" style="margin-bottom:1.5rem;">
+        <p style="font-family:'DM Serif Display',serif;font-size:1.0625rem;color:var(--charcoal);margin-bottom:0.75rem;">
+          ${esc(c.area)}
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
           ${c.items.map((item) => `
-            <li style="font-size:0.875rem;color:var(--ink);display:flex;align-items:center;gap:0.5rem;">
-              <span style="color:var(--muted);font-size:0.75rem;">&bull;</span>
-              <span>${esc(item)}</span>
-            </li>
+            <span class="tag-badge">${esc(item)}</span>
           `).join('')}
-        </ul>
+        </div>
       </div>
     `).join('');
   }
