@@ -26,23 +26,17 @@ export function renderExperience(experiences, ui, lang) {
     const hasImages = exp.images && exp.images.length > 0;
 
     return `
-    <div class="exp-row"
-         style="display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;padding:2rem 0;border-bottom:1px solid var(--border);">
-
+    <div class="exp-row">
       <!-- Left: Role, Org, Period -->
       <div>
-        <h3 style="font-family:'DM Serif Display',serif;font-size:1.125rem;color:var(--charcoal);line-height:1.2;margin-bottom:0.25rem;">
-          ${esc(data.role)}
-        </h3>
-        <p style="font-size:0.8125rem;color:var(--ink);margin-bottom:0.2rem;">${esc(data.organization)}</p>
-        <p style="font-size:0.75rem;color:var(--muted);">${esc(period)}</p>
+        <h3 class="exp-role">${esc(data.role)}</h3>
+        <p class="exp-org">${esc(data.organization)}</p>
+        <p class="exp-period">${esc(period)}</p>
       </div>
 
       <!-- Right: Description + Documentation Gallery -->
       <div>
-        <p style="font-size:0.875rem;color:var(--ink);line-height:1.7;margin-bottom:${hasImages ? '1rem' : '0'};">
-          ${esc(data.description)}
-        </p>
+        <p class="exp-desc">${esc(data.description)}</p>
 
         ${hasImages ? `
           <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.875rem;">
@@ -53,7 +47,7 @@ export function renderExperience(experiences, ui, lang) {
                 <button type="button" class="doc-thumb-btn"
                         data-img-src="${esc(url)}" data-caption="${esc(caption)}"
                         style="border:1px solid var(--border);border-radius:6px;overflow:hidden;
-                               width:140px;height:88px;padding:0;background:var(--cream);cursor:pointer;
+                               width:130px;height:82px;padding:0;background:var(--cream);cursor:pointer;
                                position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.06);
                                transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;"
                         onmouseover="this.style.transform='scale(1.03)';this.style.borderColor='var(--charcoal)';"

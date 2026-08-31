@@ -27,7 +27,6 @@ export function renderProjects(projects, ui, lang) {
 
     return `
     <div class="project-card">
-
       <!-- Col 1: Index Number -->
       <div class="project-index">
         ${esc(p.id)}
@@ -35,9 +34,8 @@ export function renderProjects(projects, ui, lang) {
 
       <!-- Col 2: Content Body -->
       <div>
-        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.35rem;flex-wrap:wrap;">
-          <h3 style="font-family:'DM Serif Display',serif;font-size:clamp(1.25rem,2.5vw,1.625rem);
-                     color:var(--charcoal);line-height:1.2;">
+        <div style="display:flex;align-items:center;gap:0.625rem;margin-bottom:0.35rem;flex-wrap:wrap;">
+          <h3 class="project-title">
             ${esc(p.title)}
           </h3>
           <span style="font-size:0.75rem;color:var(--muted);">${esc(p.year)}</span>
@@ -47,8 +45,8 @@ export function renderProjects(projects, ui, lang) {
           </span>
         </div>
 
-        <p style="font-size:0.8125rem;color:var(--muted);margin-bottom:0.75rem;">${esc(data.subtitle)}</p>
-        <p style="font-size:0.875rem;color:var(--ink);line-height:1.7;margin-bottom:1.25rem;">
+        <p class="project-subtitle">${esc(data.subtitle)}</p>
+        <p class="project-desc">
           ${esc(data.description)}
         </p>
 
@@ -58,10 +56,10 @@ export function renderProjects(projects, ui, lang) {
         </div>
       </div>
 
-      <!-- Col 3: Right Column with Preview Thumbnail & Dual Action Links -->
+      <!-- Col 3: Right Column with Preview Thumbnail & Action Links -->
       <div class="project-right-col">
         ${hasImages ? `
-          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
+          <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-start;">
             ${p.images.map((img) => {
               const url = resolveAsset(img.src);
               const caption = img.caption[lang] || img.caption.en || `${p.title} · ${data.subtitle}`;
@@ -69,7 +67,7 @@ export function renderProjects(projects, ui, lang) {
                 <button type="button" class="doc-thumb-btn"
                         data-img-src="${esc(url)}" data-caption="${esc(caption)}"
                         style="border:1px solid var(--border);border-radius:6px;overflow:hidden;
-                               width:130px;height:82px;padding:0;background:var(--cream);cursor:pointer;
+                               width:120px;height:75px;padding:0;background:var(--cream);cursor:pointer;
                                position:relative;box-shadow:0 2px 6px rgba(0,0,0,0.04);
                                transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;"
                         onmouseover="this.style.transform='scale(1.03)';this.style.borderColor='var(--charcoal)';"
