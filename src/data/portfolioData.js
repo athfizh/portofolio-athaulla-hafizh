@@ -171,12 +171,12 @@ export const portfolioData = {
       id: 'exp-2',
       period: { en: 'Oct 2024 to Feb 2026', id: 'Okt 2024 - Feb 2026' },
       en: {
-        role:         'Organizing Committee, Research & Talent Development',
+        role:         'Research, Technology & Talent Development Department (RMB)',
         organization: 'HMTI Polinema',
         description:  'Managed end-to-end execution of student research initiatives, technology competitions, and skill development workshops while coordinating communication between students and faculty.',
       },
       idLang: {
-        role:         'Divisi Penelitian & Pengembangan Bakat (Litbang)',
+        role:         'Departemen Riset Teknologi dan Minat Bakat (RMB)',
         organization: 'HMTI Polinema',
         description:  'Mengelola pelaksanaan program riset mahasiswa, perlombaan teknologi, dan lokakarya pengembangan kompetensi, sekaligus menjembatani komunikasi terstruktur antara civitas akademika dan mahasiswa.',
       },
