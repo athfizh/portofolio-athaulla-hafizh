@@ -125,26 +125,19 @@
 
   <!-- ABOUT (Hero replacement) -->
   <section id="about"
-           style="background:var(--paper);padding-top:calc(60px + 3.5rem);padding-bottom:5rem;">
+           style="background:var(--paper);padding-top:calc(60px + 2.5rem);padding-bottom:4rem;">
     <div class="container-xl">
 
       <!-- The one complex card -->
-      <div id="about-card"
-           style="display:grid;grid-template-columns:2fr 3fr;
-                  border:1px solid var(--border);border-radius:10px;overflow:hidden;
-                  min-height:620px;background:var(--card-bg);">
+      <div id="about-card" class="about-card-wrap">
 
         <!-- Left: photo fills column entirely -->
-        <div id="about-photo-col" style="position:relative;background:var(--cream-dark);min-height:400px;">
-          <img id="about-photo" alt="Athaulla Hafizh"
-               style="position:absolute;inset:0;width:100%;height:100%;
-                      object-fit:cover;object-position:center top;display:block;" />
+        <div id="about-photo-col" class="about-photo-wrap">
+          <img id="about-photo" alt="Athaulla Hafizh" />
         </div>
 
         <!-- Right: all text content -->
-        <div id="about-content"
-             style="padding:2.5rem 3rem;display:flex;flex-direction:column;gap:1.5rem;
-                    border-left:1px solid var(--border);background:var(--paper);">
+        <div id="about-content" class="about-content-wrap">
           <!-- Rendered by JS -->
         </div>
 
@@ -158,7 +151,7 @@
            style="background:var(--cream);border-top:1px solid var(--border);">
     <div class="container-xl section">
       <p id="experience-label" class="label">Experience</p>
-      <h2 id="experience-title" class="heading-section" style="margin-bottom:3rem;">Leadership & Roles</h2>
+      <h2 id="experience-title" class="heading-section" style="margin-bottom:2.5rem;">Leadership & Roles</h2>
       <div id="experience-list"></div>
     </div>
   </section>
@@ -169,8 +162,8 @@
            style="background:var(--paper);border-top:1px solid var(--border);">
     <div class="container-xl section">
       <p id="awards-label" class="label">Recognition</p>
-      <h2 id="awards-title" class="heading-section" style="margin-bottom:3rem;">Honors & Awards</h2>
-      <div id="awards-list" style="display:flex;flex-direction:column;gap:2rem;"></div>
+      <h2 id="awards-title" class="heading-section" style="margin-bottom:2.5rem;">Honors & Awards</h2>
+      <div id="awards-list" style="display:flex;flex-direction:column;gap:1.75rem;"></div>
     </div>
   </section>
 
@@ -179,7 +172,7 @@
            style="background:var(--cream);border-top:1px solid var(--border);">
     <div class="container-xl section">
       <p id="projects-label" class="label">Work</p>
-      <h2 id="projects-title" class="heading-section" style="margin-bottom:3rem;">Selected Projects</h2>
+      <h2 id="projects-title" class="heading-section" style="margin-bottom:2.5rem;">Selected Projects</h2>
       <div id="projects-list"></div>
     </div>
   </section>
@@ -190,20 +183,19 @@
            style="background:var(--paper);border-top:1px solid var(--border);">
     <div class="container-xl section">
       <p id="skills-label" class="label">Expertise</p>
-      <h2 id="skills-title" class="heading-section" style="margin-bottom:3rem;">Skills & Credentials</h2>
+      <h2 id="skills-title" class="heading-section" style="margin-bottom:2.5rem;">Skills & Credentials</h2>
 
-      <div class="skills-grid"
-           style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
+      <div class="skills-grid-wrap">
 
         <div>
           <p id="capabilities-header" style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
-                    color:var(--muted);margin-bottom:1.5rem;">Capabilities</p>
-          <div id="capabilities-list" style="display:flex;flex-direction:column;gap:1.75rem;"></div>
+                    color:var(--muted);margin-bottom:1.25rem;">Capabilities</p>
+          <div id="capabilities-list" style="display:flex;flex-direction:column;gap:1.5rem;"></div>
         </div>
 
         <div>
           <p id="certifications-header" style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
-                    color:var(--muted);margin-bottom:1.5rem;">Certifications</p>
+                    color:var(--muted);margin-bottom:1.25rem;">Certifications</p>
           <div id="certifications-list"></div>
         </div>
 

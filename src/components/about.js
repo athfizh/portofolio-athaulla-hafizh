@@ -100,7 +100,7 @@ export function renderAbout({ profile, about, ui, lang }) {
     <hr style="border:none;border-top:1px solid var(--border);margin:0;">
 
     <!-- 2-col mini-grid: Education + Currently -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div class="about-mini-grid">
       <!-- Education -->
       <div>
         <p class="meta-tag" style="margin-bottom:0.5rem;">${lang === 'id' ? 'PENDIDIKAN' : 'EDUCATION'}</p>

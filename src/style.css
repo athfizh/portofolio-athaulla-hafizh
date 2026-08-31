@@ -41,7 +41,7 @@
   --accent:         #F5F0E8;
   --nav-bg:         rgba(18, 18, 18, 0.92);
   --card-bg:        #1A1A1A;
-  --badge-bg:       #132B1A;
+  --badge-bg:     #132B1A;
   --badge-border:   #1E4628;
   --badge-text:     #66BB6A;
   --contact-bg:     #0A0A0A;
@@ -94,12 +94,12 @@
 
   /* Layout container */
   .container-xl {
-    @apply max-w-6xl mx-auto px-6 sm:px-10 lg:px-16;
+    @apply max-w-6xl mx-auto px-5 sm:px-8 lg:px-16;
   }
 
   /* Section spacing */
   .section {
-    @apply py-20 sm:py-28;
+    @apply py-16 sm:py-24 lg:py-28;
   }
 
   /* Section label (overline) */
@@ -111,13 +111,13 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   /* Display heading */
   .heading-display {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.25rem, 5.5vw, 4.5rem);
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: var(--charcoal);
@@ -126,7 +126,7 @@
   /* Section heading */
   .heading-section {
     font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.75rem, 4vw, 3rem);
     letter-spacing: -0.025em;
     color: var(--charcoal);
   }
@@ -180,7 +180,103 @@
     opacity: 0.6;
   }
 
-  /* Project card */
+  /* About Card Complex Responsive Layout */
+  .about-card-wrap {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 620px;
+    background: var(--card-bg);
+  }
+  .about-photo-wrap {
+    position: relative;
+    background: var(--cream-dark);
+    min-height: 420px;
+  }
+  .about-photo-wrap img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+  .about-content-wrap {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-left: 1px solid var(--border);
+    background: var(--paper);
+  }
+  .about-mini-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .about-card-wrap {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .about-photo-wrap {
+      height: 380px;
+      min-height: 320px;
+    }
+    .about-content-wrap {
+      padding: 1.75rem 1.25rem;
+      border-left: none;
+      border-top: 1px solid var(--border);
+      gap: 1.25rem;
+    }
+    .about-mini-grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  /* Experience Row Responsive */
+  .exp-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  @media (max-width: 768px) {
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: 1.5rem 0;
+    }
+  }
+
+  /* Award Card Responsive */
+  .award-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: start;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  @media (max-width: 768px) {
+    .award-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1.25rem;
+    }
+  }
+
+  /* Project Card Responsive */
   .project-card {
     border-top: 1px solid var(--border);
     padding: 2.25rem 0;
@@ -209,12 +305,30 @@
   @media (max-width: 768px) {
     .project-card {
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
+      padding: 1.5rem 0;
       align-items: start;
+    }
+    .project-index {
+      display: none;
     }
     .project-right-col {
       align-items: flex-start;
       margin-top: 0.5rem;
+    }
+  }
+
+  /* Skills Grid Responsive */
+  .skills-grid-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .skills-grid-wrap {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
   }
 
@@ -250,12 +364,19 @@
   .cert-row:first-child {
     border-top: 1px solid var(--border);
   }
+  @media (max-width: 640px) {
+    .cert-row {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1rem 0;
+    }
+  }
 
   /* Back to top button */
   .btn-back-to-top {
     position: fixed;
-    bottom: 2.25rem;
-    right: 2.25rem;
+    bottom: 1.75rem;
+    right: 1.75rem;
     z-index: 90;
     width: 2.75rem;
     height: 2.75rem;
@@ -350,6 +471,65 @@
   }
   .cursor-dot.hovered  { width: 6px; height: 6px; opacity: 0.6; }
   .cursor-ring.hovered { width: 52px; height: 52px; opacity: 0.15; }
+
+  @media (pointer: coarse), (max-width: 768px) {
+    .cursor-dot, .cursor-ring { display: none !important; }
+  }
+}
+
+/* ─── Preloader Overlay (Concept 1: Editorial Counter & Curtain Reveal) ─── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 99999;
+  background-color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.preloader.curtain-up {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  box-sizing: border-box;
+}
+
+.preloader-track {
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  border-radius: 999px;
+}
+
+.preloader-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--charcoal);
+  border-radius: 999px;
+  transition: width 0.05s linear;
 }
 
 /* ─── Toast Notification ────────────────────────────────────────── */
@@ -372,6 +552,8 @@
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
+  width: max-content;
+  max-width: 90vw;
   transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -386,13 +568,13 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 10, 0.7);
+  background: rgba(10, 10, 10, 0.75);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 300;
   align-items: flex-start;
   justify-content: center;
-  padding: 10vh 1rem 1rem;
+  padding: 8vh 1rem 1rem;
 }
 .cmd-backdrop.open {
   display: flex;
@@ -460,56 +642,6 @@
   border: 1px solid var(--border);
 }
 
-/* ─── Preloader Overlay (Concept 1: Editorial Counter & Curtain Reveal) ─── */
-.preloader {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background-color: var(--paper);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
-  will-change: transform;
-  pointer-events: auto;
-}
-
-.preloader.curtain-up {
-  transform: translateY(-100%);
-  pointer-events: none;
-}
-
-.preloader-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 90%;
-  max-width: 440px;
-}
-
-.preloader-track {
-  width: 100%;
-  height: 1.5px;
-  background: var(--border);
-  position: relative;
-  overflow: hidden;
-  margin-top: 1.75rem;
-  border-radius: 999px;
-}
-
-.preloader-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
-  background: var(--charcoal);
-  border-radius: 999px;
-  transition: width 0.05s linear;
-}
-
 /* ─── Utilities ──────────────────────────────────────────────── */
 @layer utilities {
   .bg-cream    { background-color: var(--cream); }
@@ -526,7 +658,7 @@
     color: #000 !important;
   }
   #navbar, #back-to-top, .toast-container, .cmd-backdrop, #lightbox-modal,
-  .cursor-dot, .cursor-ring, footer button {
+  .cursor-dot, .cursor-ring, footer button, .preloader {
     display: none !important;
   }
   .container-xl {
