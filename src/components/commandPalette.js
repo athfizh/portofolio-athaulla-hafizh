@@ -28,13 +28,13 @@ export function initCommandPalette(portfolioData) {
       { label: isId ? 'Kontak & Kolaborasi' : 'Go to: Contact', badge: isId ? 'Navigasi' : 'Section', action: () => scrollTo('#contact') },
 
       // Quick Actions
-      { label: isId ? 'Ganti Bahasa (English / Indonesia)' : 'Switch Language (EN / ID)', badge: 'i18n', action: () => setLang(getLang() === 'en' ? 'id' : 'en', true) },
-      { label: isId ? 'Ubah Mode Tema Gelap / Terang' : 'Toggle Dark / Light Mode', badge: 'Theme', action: () => toggleTheme() },
+      { label: isId ? 'Ganti Bahasa (English / Indonesia)' : 'Switch Language (EN / ID)', badge: isId ? 'Bahasa' : 'Language', action: () => setLang(getLang() === 'en' ? 'id' : 'en', true) },
+      { label: isId ? 'Ubah Mode Tema Gelap / Terang' : 'Toggle Dark / Light Mode', badge: isId ? 'Tema' : 'Theme', action: () => toggleTheme() },
       { label: isId ? 'Salin Alamat Email' : 'Copy Email Address', badge: 'Email', action: () => copyToClipboard(portfolioData.profile.email) },
-      { label: isId ? 'Unduh CV / Resume' : 'Download CV / Resume', badge: 'Link', action: () => window.open(portfolioData.profile.resume, '_blank') },
-      { label: isId ? 'Kunjungi Profil LinkedIn' : 'Open LinkedIn Profile', badge: 'Social', action: () => window.open(portfolioData.profile.social.linkedin, '_blank') },
-      { label: isId ? 'Kunjungi Profil GitHub' : 'Open GitHub Profile', badge: 'Social', action: () => window.open(portfolioData.profile.social.github, '_blank') },
-      { label: isId ? 'Cetak Halaman (PDF Resume)' : 'Print / Save as PDF Resume', badge: 'Print', action: () => window.print() },
+      { label: isId ? 'Unduh CV / Resume' : 'Download CV / Resume', badge: isId ? 'Tautan' : 'Link', action: () => window.open(portfolioData.profile.resume, '_blank') },
+      { label: isId ? 'Kunjungi Profil LinkedIn' : 'Open LinkedIn Profile', badge: isId ? 'Sosial' : 'Social', action: () => window.open(portfolioData.profile.social.linkedin, '_blank') },
+      { label: isId ? 'Kunjungi Profil GitHub' : 'Open GitHub Profile', badge: isId ? 'Sosial' : 'Social', action: () => window.open(portfolioData.profile.social.github, '_blank') },
+      { label: isId ? 'Cetak Halaman (PDF Resume)' : 'Print / Save as PDF Resume', badge: isId ? 'Cetak' : 'Print', action: () => window.print() },
     ];
   }
 
