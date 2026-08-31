@@ -7,41 +7,49 @@
 
 /* ─── CSS Custom Properties ────────────────────────────────── */
 :root {
-  --cream:        #F5F0E8;
-  --cream-dark:   #EDE8DE;
-  --paper:        #FAF8F4;
-  --charcoal:     #1C1C1C;
-  --charcoal-2:   #2E2E2E;
-  --ink:          #3D3D3D;
-  --muted:        #8A8580;
-  --border:       #DDD8CF;
-  --accent:       #1C1C1C;
-  --nav-bg:       rgba(250, 248, 244, 0.92);
-  --card-bg:      #FFFFFF;
-  --badge-bg:     #EDF7ED;
-  --badge-border: #C8E6C9;
-  --badge-text:   #2E7D32;
-  --contact-bg:   #1C1C1C;
-  --contact-text: #FAF8F4;
+  --cream:          #F5F0E8;
+  --cream-dark:     #EDE8DE;
+  --paper:          #FAF8F4;
+  --charcoal:       #1C1C1C;
+  --charcoal-2:     #2E2E2E;
+  --ink:            #3D3D3D;
+  --muted:          #8A8580;
+  --border:         #DDD8CF;
+  --accent:         #1C1C1C;
+  --nav-bg:         rgba(250, 248, 244, 0.92);
+  --card-bg:        #FFFFFF;
+  --badge-bg:       #EDF7ED;
+  --badge-border:   #C8E6C9;
+  --badge-text:     #2E7D32;
+  --contact-bg:     #1C1C1C;
+  --contact-text:   #FAF8F4;
+  --footer-bg:      #181818;
+  --footer-text:    #FAF8F4;
+  --footer-subtext: #8A8580;
+  --footer-border:  #282828;
 }
 
 [data-theme="dark"] {
-  --cream:        #1E1E1E;
-  --cream-dark:   #262626;
-  --paper:        #121212;
-  --charcoal:     #F5F0E8;
-  --charcoal-2:   #E2DDD6;
-  --ink:          #D4CECA;
-  --muted:        #8E8982;
-  --border:       #2D2D2D;
-  --accent:       #F5F0E8;
-  --nav-bg:       rgba(18, 18, 18, 0.92);
-  --card-bg:      #1A1A1A;
-  --badge-bg:     #132B1A;
-  --badge-border: #1E4628;
-  --badge-text:   #66BB6A;
-  --contact-bg:   #0A0A0A;
-  --contact-text: #F5F0E8;
+  --cream:          #1E1E1E;
+  --cream-dark:     #262626;
+  --paper:          #121212;
+  --charcoal:       #F5F0E8;
+  --charcoal-2:     #E2DDD6;
+  --ink:            #D4CECA;
+  --muted:          #8E8982;
+  --border:         #2D2D2D;
+  --accent:         #F5F0E8;
+  --nav-bg:         rgba(18, 18, 18, 0.92);
+  --card-bg:        #1A1A1A;
+  --badge-bg:       #132B1A;
+  --badge-border:   #1E4628;
+  --badge-text:     #66BB6A;
+  --contact-bg:     #0A0A0A;
+  --contact-text:   #F5F0E8;
+  --footer-bg:      #060606;
+  --footer-text:    #F5F0E8;
+  --footer-subtext: #8E8982;
+  --footer-border:  #1F1F1F;
 }
 
 /* ─── Base ──────────────────────────────────────────────────── */
