@@ -209,19 +209,18 @@
            style="background:var(--contact-bg);border-top:1px solid var(--border);">
     <div class="container-xl section" style="text-align:center;">
       <h2 id="contact-heading" class="heading-section"
-          style="color:var(--contact-text);margin-bottom:1.25rem;max-width:22ch;margin-left:auto;margin-right:auto;"></h2>
+          style="color:var(--contact-text);margin-bottom:1rem;max-width:24ch;margin-left:auto;margin-right:auto;"></h2>
       <p id="contact-tagline" class="body-md"
-         style="color:var(--muted);max-width:44ch;margin-left:auto;margin-right:auto;margin-bottom:3rem;"></p>
+         style="color:var(--muted);max-width:44ch;margin-left:auto;margin-right:auto;margin-bottom:2.5rem;"></p>
       <div id="contact-links"
-           style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2rem;"></div>
+           style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:1.25rem;"></div>
     </div>
   </section>
 
 
   <!-- FOOTER -->
-  <footer style="background:var(--footer-bg);border-top:1px solid var(--footer-border);padding:1.75rem 0;transition:background-color 0.3s ease;">
-    <div class="container-xl"
-         style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.25rem;">
+  <footer class="footer-wrap">
+    <div class="container-xl footer-inner">
       <div>
         <p style="color:var(--footer-text);font-size:0.875rem;font-weight:500;letter-spacing:-0.01em;margin-bottom:0.15rem;">Athaulla Hafizh</p>
         <p id="footer-subtext" style="color:var(--footer-subtext);font-size:0.75rem;">Informatics Engineering · Polinema</p>
@@ -239,20 +238,11 @@
   </footer>
 
   <!-- LIGHTBOX MODAL FOR IMAGES -->
-  <div id="lightbox-modal"
-       style="display:none;position:fixed;inset:0;z-index:200;background:rgba(20,20,20,0.88);
-              backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-              align-items:center;justify-content:center;padding:1.5rem;"
-       aria-hidden="true">
-    <div style="position:relative;max-width:900px;width:100%;max-height:90vh;display:flex;flex-direction:column;align-items:center;">
-      <button id="lightbox-close"
-              style="position:absolute;top:-2.5rem;right:0;background:none;border:none;color:#fff;
-                     font-size:1.75rem;cursor:pointer;line-height:1;padding:0.25rem;"
-              aria-label="Close modal">✕</button>
-      <img id="lightbox-img" src="" alt="Documentation Preview"
-           style="max-width:100%;max-height:78vh;object-fit:contain;border-radius:6px;box-shadow:0 20px 40px rgba(0,0,0,0.4);" />
-      <p id="lightbox-caption"
-         style="color:#ccc;font-size:0.875rem;margin-top:1rem;text-align:center;font-family:'Inter',sans-serif;"></p>
+  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+    <div class="lightbox-content-wrap">
+      <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close modal">✕</button>
+      <img id="lightbox-img" class="lightbox-img-el" src="" alt="Documentation Preview" />
+      <p id="lightbox-caption" class="lightbox-caption-el"></p>
     </div>
   </div>
 
