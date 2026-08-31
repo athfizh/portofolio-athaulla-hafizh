@@ -15,6 +15,7 @@ import { renderContact } from './components/contact.js';
 import { renderFooter } from './components/footer.js';
 import { initLightbox, initGalleryListeners } from './components/lightbox.js';
 import { initCommandPalette } from './components/commandPalette.js';
+import { initPreloader } from './components/preloader.js';
 
 // Utilities & Controllers
 import { initCopyListeners } from './utils/clipboard.js';
@@ -56,6 +57,7 @@ function bootstrap() {
   renderAll(initialLang);
 
   // 2. Initialize Controllers
+  initPreloader();
   initNavbar();
   initMobileMenu();
   initBackToTop();

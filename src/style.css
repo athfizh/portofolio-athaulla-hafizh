@@ -460,6 +460,56 @@
   border: 1px solid var(--border);
 }
 
+/* ─── Preloader Overlay (Concept 1: Editorial Counter & Curtain Reveal) ─── */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.preloader.curtain-up {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 90%;
+  max-width: 440px;
+}
+
+.preloader-track {
+  width: 100%;
+  height: 1.5px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.75rem;
+  border-radius: 999px;
+}
+
+.preloader-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--charcoal);
+  border-radius: 999px;
+  transition: width 0.05s linear;
+}
+
 /* ─── Utilities ──────────────────────────────────────────────── */
 @layer utilities {
   .bg-cream    { background-color: var(--cream); }
