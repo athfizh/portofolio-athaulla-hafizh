@@ -1,18 +1,32 @@
 /**
- * Selected Projects Component
+ * Selected Projects Component with Bilingual Support
  */
 import { qs, esc, ARROW } from '../utils/dom.js';
 import { resolveAsset } from '../utils/assets.js';
 
-export function renderProjects(projects) {
+export function renderProjects(projects, ui, lang) {
+  const labelEl = qs('#projects-label');
+  if (labelEl && ui[lang]?.sections?.projectsLabel) {
+    labelEl.textContent = ui[lang].sections.projectsLabel;
+  }
+
+  const titleEl = qs('#projects-title');
+  if (titleEl && ui[lang]?.sections?.projectsTitle) {
+    titleEl.textContent = ui[lang].sections.projectsTitle;
+  }
+
   const list = qs('#projects-list');
   if (!list) return;
 
-  list.innerHTML = projects.map((p, i) => {
+  const uLang = ui[lang] || ui.en;
+
+  list.innerHTML = projects.map((p) => {
+    const data = lang === 'id' ? p.idLang : p.en;
+    const status = p.status[lang] || p.status.en;
     const hasImages = p.images && p.images.length > 0;
 
     return `
-    <div class="project-card reveal reveal-delay-${Math.min(i + 1, 5)}">
+    <div class="project-card">
 
       <!-- Col 1: Index Number -->
       <div class="project-index">
@@ -29,17 +43,17 @@ export function renderProjects(projects) {
           <span style="font-size:0.75rem;color:var(--muted);">${esc(p.year)}</span>
           <span style="font-size:0.6875rem;padding:2px 8px;border-radius:999px;
                        background:var(--cream);border:1px solid var(--border);color:var(--ink);">
-            ${esc(p.status)}
+            ${esc(status)}
           </span>
         </div>
 
-        <p style="font-size:0.8125rem;color:var(--muted);margin-bottom:0.75rem;">${esc(p.subtitle)}</p>
+        <p style="font-size:0.8125rem;color:var(--muted);margin-bottom:0.75rem;">${esc(data.subtitle)}</p>
         <p style="font-size:0.875rem;color:var(--ink);line-height:1.7;margin-bottom:1.25rem;">
-          ${esc(p.description)}
+          ${esc(data.description)}
         </p>
 
         <!-- Tech tags -->
-        <div style="display:flex;flex-wrap:wrap;gap:0.375rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
           ${p.tech.map((t) => `<span class="tag-badge">${esc(t)}</span>`).join('')}
         </div>
       </div>
@@ -50,7 +64,7 @@ export function renderProjects(projects) {
           <div style="display:flex;flex-direction:column;gap:0.5rem;align-items:flex-end;">
             ${p.images.map((img) => {
               const url = resolveAsset(img.src);
-              const caption = img.caption || `${p.title} · ${p.subtitle}`;
+              const caption = img.caption[lang] || img.caption.en || `${p.title} · ${data.subtitle}`;
               return `
                 <button type="button" class="doc-thumb-btn"
                         data-img-src="${esc(url)}" data-caption="${esc(caption)}"
@@ -64,7 +78,7 @@ export function renderProjects(projects) {
                   <img src="${esc(url)}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
                   <span style="position:absolute;bottom:3px;right:3px;background:rgba(0,0,0,0.65);color:#fff;
                                font-size:0.625rem;padding:1px 4px;border-radius:3px;backdrop-filter:blur(2px);">
-                    Preview
+                    ${esc(uLang.actions.preview)}
                   </span>
                 </button>
               `;
@@ -73,8 +87,8 @@ export function renderProjects(projects) {
 
         ${(p.live || p.github) ? `
           <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
-            ${p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener noreferrer" class="link-underline" style="font-size:0.75rem;white-space:nowrap;">View Live ${ARROW}</a>` : ''}
-            ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener noreferrer" class="link-underline" style="font-size:0.75rem;white-space:nowrap;">GitHub ${ARROW}</a>` : ''}
+            ${p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener noreferrer" class="link-underline" style="font-size:0.75rem;white-space:nowrap;">${esc(uLang.actions.viewLive)} ${ARROW}</a>` : ''}
+            ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener noreferrer" class="link-underline" style="font-size:0.75rem;white-space:nowrap;">${esc(uLang.actions.viewCode)} ${ARROW}</a>` : ''}
           </div>` : ''}
       </div>
     </div>`;

@@ -1,5 +1,5 @@
 /**
- * Application Entry Point & Module Orchestrator
+ * Application Entry Point & Module Orchestrator with Bilingual Support
  */
 import './style.css';
 import { portfolioData } from './data/portfolioData.js';
@@ -12,44 +12,64 @@ import { renderAwards } from './components/awards.js';
 import { renderProjects } from './components/projects.js';
 import { renderSkills } from './components/skills.js';
 import { renderContact } from './components/contact.js';
-import { renderFooter, initLiveClock } from './components/footer.js';
+import { renderFooter } from './components/footer.js';
 import { initLightbox, initGalleryListeners } from './components/lightbox.js';
 import { initCommandPalette } from './components/commandPalette.js';
 
 // Utilities & Controllers
 import { initCopyListeners } from './utils/clipboard.js';
 import { initThemeToggle } from './utils/theme.js';
+import { initLangToggle, getLang, onLangChange } from './utils/i18n.js';
 import { initBackToTop, initScrollReveal } from './utils/scroll.js';
 import { initCursor } from './utils/cursor.js';
+
+/**
+ * Render all views with active language
+ */
+function renderAll(lang = getLang()) {
+  const { profile, ui, about, experiences, awards, projects, capabilities, certifications, footer } = portfolioData;
+
+  const navItems = ui[lang]?.nav || ui.en.nav;
+
+  renderNavbar(profile.name, navItems);
+  renderAbout({ profile, about, ui, lang });
+  renderExperience(experiences, ui, lang);
+  renderAwards(awards, ui, lang);
+  renderProjects(projects, ui, lang);
+  renderSkills(capabilities, certifications, ui, lang);
+  renderContact(profile, ui, lang);
+  renderFooter(footer.year, ui, lang);
+
+  // Re-attach dynamic element listeners for lightbox and copy buttons
+  initGalleryListeners();
+  initCopyListeners(profile.email);
+}
 
 /**
  * Bootstrap the entire Portfolio Web App
  */
 function bootstrap() {
-  const { profile, about, experiences, awards, projects, capabilities, certifications, footer } = portfolioData;
+  const { profile } = portfolioData;
+  const initialLang = getLang();
 
-  // 1. Render all HTML Component Views
-  renderNavbar(profile.name);
-  renderAbout({ profile, about });
-  renderExperience(experiences);
-  renderAwards(awards);
-  renderProjects(projects);
-  renderSkills(capabilities, certifications);
-  renderContact(profile);
-  renderFooter(footer.year);
+  // 1. Initial Render
+  renderAll(initialLang);
 
-  // 2. Initialize Interactive Features & Event Controllers
+  // 2. Initialize Controllers
   initNavbar();
   initMobileMenu();
   initBackToTop();
   initLightbox();
-  initGalleryListeners();
-  initLiveClock();
   initThemeToggle();
+  initLangToggle();
   initCommandPalette(portfolioData);
-  initCopyListeners(profile.email);
 
-  // 3. Initialize Visual Enhancements
+  // 3. Subscribe to Language Change
+  onLangChange((newLang) => {
+    renderAll(newLang);
+  });
+
+  // 4. Initialize Visual Enhancements
   requestAnimationFrame(() => {
     initCursor();
     setTimeout(initScrollReveal, 60);

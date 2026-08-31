@@ -50,11 +50,21 @@
       <div style="display:flex;align-items:center;gap:1.5rem;">
         <nav id="nav-desktop" style="display:flex;align-items:center;gap:1.75rem;"></nav>
 
-        <!-- Command palette shortcut & Theme toggle -->
-        <div style="display:flex;align-items:center;gap:0.5rem;">
+        <!-- Language toggle, Command palette shortcut & Theme toggle -->
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+          <button id="lang-toggle-btn" aria-label="Switch Language" title="Switch Language (EN / ID)"
+                  style="background:var(--cream);border:1px solid var(--border);border-radius:6px;
+                         height:30px;padding:0 0.5rem;font-size:0.6875rem;cursor:pointer;
+                         display:inline-flex;align-items:center;gap:0.25rem;font-family:'Inter',sans-serif;
+                         transition:background 0.2s,border-color 0.2s;">
+            <span style="font-weight:700;">EN</span>
+            <span style="color:var(--border);">/</span>
+            <span style="color:var(--muted);">ID</span>
+          </button>
+
           <button id="cmd-trigger-btn" aria-label="Command Menu (Ctrl+K)" title="Quick Actions (Ctrl+K)"
                   style="background:var(--cream);border:1px solid var(--border);border-radius:6px;
-                         padding:0.25rem 0.5rem;font-size:0.6875rem;color:var(--muted);cursor:pointer;
+                         height:30px;padding:0 0.5rem;font-size:0.6875rem;color:var(--muted);cursor:pointer;
                          display:inline-flex;align-items:center;gap:0.25rem;font-family:'Inter',monospace;
                          transition:border-color 0.2s,color 0.2s;">
             <span>⌘K</span>
@@ -117,8 +127,8 @@
   <section id="experience"
            style="background:var(--cream);border-top:1px solid var(--border);">
     <div class="container-xl section">
-      <p class="label">Experience</p>
-      <h2 class="heading-section" style="margin-bottom:3rem;">Leadership & Roles</h2>
+      <p id="experience-label" class="label">Experience</p>
+      <h2 id="experience-title" class="heading-section" style="margin-bottom:3rem;">Leadership & Roles</h2>
       <div id="experience-list"></div>
     </div>
   </section>
@@ -128,8 +138,8 @@
   <section id="awards"
            style="background:var(--paper);border-top:1px solid var(--border);">
     <div class="container-xl section">
-      <p class="label">Recognition</p>
-      <h2 class="heading-section" style="margin-bottom:3rem;">Honors & Awards</h2>
+      <p id="awards-label" class="label">Recognition</p>
+      <h2 id="awards-title" class="heading-section" style="margin-bottom:3rem;">Honors & Awards</h2>
       <div id="awards-list" style="display:flex;flex-direction:column;gap:2rem;"></div>
     </div>
   </section>
@@ -138,8 +148,8 @@
   <section id="projects"
            style="background:var(--cream);border-top:1px solid var(--border);">
     <div class="container-xl section">
-      <p class="label">Work</p>
-      <h2 class="heading-section" style="margin-bottom:3rem;">Selected Projects</h2>
+      <p id="projects-label" class="label">Work</p>
+      <h2 id="projects-title" class="heading-section" style="margin-bottom:3rem;">Selected Projects</h2>
       <div id="projects-list"></div>
     </div>
   </section>
@@ -149,19 +159,20 @@
   <section id="skills"
            style="background:var(--paper);border-top:1px solid var(--border);">
     <div class="container-xl section">
-      <h2 class="heading-section" style="margin-bottom:3rem;">Skills & Credentials</h2>
+      <p id="skills-label" class="label">Expertise</p>
+      <h2 id="skills-title" class="heading-section" style="margin-bottom:3rem;">Skills & Credentials</h2>
 
       <div class="skills-grid"
            style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;">
 
         <div>
-          <p style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+          <p id="capabilities-header" style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
                     color:var(--muted);margin-bottom:1.5rem;">Capabilities</p>
           <div id="capabilities-list" style="display:flex;flex-direction:column;gap:1.75rem;"></div>
         </div>
 
         <div>
-          <p style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+          <p id="certifications-header" style="font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
                     color:var(--muted);margin-bottom:1.5rem;">Certifications</p>
           <div id="certifications-list"></div>
         </div>
@@ -191,7 +202,7 @@
          style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.25rem;">
       <div>
         <p style="color:var(--footer-text);font-size:0.875rem;font-weight:500;letter-spacing:-0.01em;margin-bottom:0.15rem;">Athaulla Hafizh</p>
-        <p style="color:var(--footer-subtext);font-size:0.75rem;">Informatics Engineering · Polinema</p>
+        <p id="footer-subtext" style="color:var(--footer-subtext);font-size:0.75rem;">Informatics Engineering · Polinema</p>
       </div>
 
       <div style="display:flex;align-items:center;gap:0.5rem;">
@@ -200,7 +211,7 @@
       </div>
 
       <div>
-        <p style="color:var(--footer-subtext);font-size:0.8125rem;">© 2026 · All rights reserved</p>
+        <p id="footer-right-text" style="color:var(--footer-subtext);font-size:0.8125rem;">© 2026 · All rights reserved</p>
       </div>
     </div>
   </footer>

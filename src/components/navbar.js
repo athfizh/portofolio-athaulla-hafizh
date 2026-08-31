@@ -1,31 +1,22 @@
 /**
- * Navbar Component
+ * Navbar Component with Bilingual Support
  */
 import { qs, qsa, esc } from '../utils/dom.js';
 
-export const NAV_LINKS = [
-  { label: 'About',      href: '#about'      },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Awards',     href: '#awards'     },
-  { label: 'Work',       href: '#projects'   },
-  { label: 'Skills',     href: '#skills'     },
-  { label: 'Contact',    href: '#contact'    },
-];
-
-export function renderNavbar(name) {
+export function renderNavbar(name, navItems) {
   const logo = qs('#nav-logo');
   if (logo) logo.textContent = name;
 
   const desktopNav = qs('#nav-desktop');
-  if (desktopNav) {
-    desktopNav.innerHTML = NAV_LINKS.map(
+  if (desktopNav && navItems) {
+    desktopNav.innerHTML = navItems.map(
       (l) => `<a href="${esc(l.href)}" class="nav-item">${esc(l.label)}</a>`
     ).join('');
   }
 
   const mobileNav = qs('#nav-mobile');
-  if (mobileNav) {
-    mobileNav.innerHTML = NAV_LINKS.map(
+  if (mobileNav && navItems) {
+    mobileNav.innerHTML = navItems.map(
       (l) => `<a href="${esc(l.href)}" class="nav-item" style="padding:0.625rem 0;display:block;">${esc(l.label)}</a>`
     ).join('');
   }

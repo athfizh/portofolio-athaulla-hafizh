@@ -1,29 +1,42 @@
 /**
- * Footer & Real-Time Local Clock Component
+ * Footer Component with Real-time Clock (WIB) and Bilingual Support
  */
 import { qs } from '../utils/dom.js';
 
-export function renderFooter(year) {
-  const copy = qs('#footer-copy');
-  if (copy) copy.textContent = `© ${year} · All rights reserved`;
-}
+let clockInterval = null;
 
-export function initLiveClock() {
-  const clockEl = qs('#footer-live-time');
-  if (!clockEl) return;
+export function renderFooter(year, ui, lang) {
+  const uLang = ui[lang] || ui.en;
+  const pLang = lang === 'id' ? 'Teknik Informatika · Polinema' : 'Informatics Engineering · Polinema';
 
-  function update() {
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('en-US', {
-      timeZone: 'Asia/Jakarta',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true,
-    });
-    clockEl.textContent = `Malang, ID · ${timeStr} WIB`;
+  const subEl = qs('#footer-subtext');
+  if (subEl) subEl.textContent = pLang;
+
+  const rightEl = qs('#footer-right-text');
+  if (rightEl) rightEl.textContent = `© ${year} · ${uLang.actions.allRights}`;
+
+  // Start Real-Time Live Clock (Malang, Indonesia - WIB / UTC+7)
+  const timeEl = qs('#footer-live-time');
+  if (!timeEl) return;
+
+  function updateClock() {
+    try {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Jakarta',
+        hour12: true,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      };
+      const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+      timeEl.textContent = `Malang, ID · ${timeString} WIB`;
+    } catch {
+      timeEl.textContent = 'Malang, ID · WIB';
+    }
   }
 
-  update();
-  setInterval(update, 1000);
+  if (clockInterval) clearInterval(clockInterval);
+  updateClock();
+  clockInterval = setInterval(updateClock, 1000);
 }

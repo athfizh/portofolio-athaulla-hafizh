@@ -1,12 +1,17 @@
 /**
- * About Component
+ * About Component with Bilingual Support
  */
 import { qs, esc, ARROW } from '../utils/dom.js';
 import { resolveAsset } from '../utils/assets.js';
 
-export function renderAbout({ profile, about }) {
-  const { name, role, availability, photo, resume, social, email } = profile;
-  const { bio, philosophy, philosophyTranslation, currentFocus, education } = about;
+export function renderAbout({ profile, about, ui, lang }) {
+  const pLang = profile[lang] || profile.en;
+  const aLang = about[lang] || about.en;
+  const uLang = ui[lang] || ui.en;
+
+  const { name, photo, resume, social, email } = profile;
+  const { role, availability } = pLang;
+  const { bio, philosophyTranslation, currentFocus, education } = aLang;
 
   // Photo
   const photoImg = qs('#about-photo');
@@ -53,7 +58,7 @@ export function renderAbout({ profile, about }) {
                     font-size:0.75rem;font-weight:500;text-decoration:none;letter-spacing:0.02em;
                     transition:transform 0.2s,opacity 0.2s;"
              onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-            CV/Resume ${ARROW}
+            ${esc(uLang.actions.cv)} ${ARROW}
           </a>` : ''}
 
         ${socialLinks.map((l) => `
@@ -66,7 +71,7 @@ export function renderAbout({ profile, about }) {
         <button type="button" class="btn-copy-email link-underline" data-email="${esc(email)}"
                 style="background:none;border:none;padding:0;font-size:0.8125rem;color:var(--charcoal);cursor:pointer;display:inline-flex;align-items:center;"
                 title="Click to copy email address">
-          Copy Email ${ARROW}
+          ${esc(uLang.actions.copyEmail)} ${ARROW}
         </button>
       </div>
     </div>
@@ -79,7 +84,7 @@ export function renderAbout({ profile, about }) {
       <blockquote style="font-family:'DM Serif Display',serif;font-style:italic;
                          font-size:clamp(1.125rem,2vw,1.375rem);color:var(--charcoal);
                          line-height:1.25;margin-bottom:0.35rem;">
-        &ldquo;${esc(philosophy)}&rdquo;
+        &ldquo;${esc(about.philosophy)}&rdquo;
       </blockquote>
       <p style="font-size:0.75rem;color:var(--muted);">${esc(philosophyTranslation)}</p>
     </div>
@@ -98,19 +103,19 @@ export function renderAbout({ profile, about }) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
       <!-- Education -->
       <div>
-        <p class="meta-tag" style="margin-bottom:0.5rem;">EDUCATION</p>
+        <p class="meta-tag" style="margin-bottom:0.5rem;">${lang === 'id' ? 'PENDIDIKAN' : 'EDUCATION'}</p>
         <p style="font-family:'DM Serif Display',serif;font-size:0.9375rem;color:var(--charcoal);line-height:1.2;margin-bottom:0.25rem;">
           ${esc(education.institution)}
         </p>
         <p style="font-size:0.8125rem;color:var(--ink);margin-bottom:0.2rem;">${esc(education.degree)}</p>
         <p style="font-size:0.75rem;color:var(--muted);">
-          GPA ${esc(education.gpa)} &middot; ${esc(education.period)}
+          IPK / GPA ${esc(education.gpa)} &middot; ${esc(education.period)}
         </p>
       </div>
 
       <!-- Currently -->
       <div>
-        <p class="meta-tag" style="margin-bottom:0.5rem;">CURRENTLY</p>
+        <p class="meta-tag" style="margin-bottom:0.5rem;">${lang === 'id' ? 'FOKUS SAAT INI' : 'CURRENTLY'}</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.35rem;">
           ${currentFocus.map((f) => `
             <li style="font-size:0.8125rem;color:var(--ink);display:flex;align-items:flex-start;gap:0.4rem;line-height:1.4;">

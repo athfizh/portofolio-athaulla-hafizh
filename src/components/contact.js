@@ -1,16 +1,17 @@
 /**
- * Contact Component
+ * Contact Component with Bilingual Support
  */
 import { qs, esc, ARROW } from '../utils/dom.js';
 
-export function renderContact(profile) {
+export function renderContact(profile, ui, lang) {
   const { email, social, resume } = profile;
+  const uLang = ui[lang] || ui.en;
 
   const heading = qs('#contact-heading');
-  if (heading) heading.textContent = "Let's build something together.";
+  if (heading) heading.textContent = uLang.sections.contactHeading;
 
   const tagline = qs('#contact-tagline');
-  if (tagline) tagline.textContent = "Open for collaboration, internship, or technical discussions.";
+  if (tagline) tagline.textContent = uLang.sections.contactTagline;
 
   const links = qs('#contact-links');
   if (links) {
@@ -24,7 +25,7 @@ export function renderContact(profile) {
                 style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
                        border-radius:4px;color:var(--contact-text);cursor:pointer;padding:3px 8px;font-size:0.75rem;
                        transition:background 0.2s;">
-          Copy Email
+          ${esc(uLang.actions.copyEmail)}
         </button>
       </div>
       <a href="${esc(social.linkedin)}" target="_blank" rel="noopener noreferrer"
@@ -36,7 +37,7 @@ export function renderContact(profile) {
          class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">Instagram ${ARROW}</a>` : ''}
       ${resume ? `
       <a href="${esc(resume)}" target="_blank" rel="noopener noreferrer"
-         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">CV/Resume ${ARROW}</a>` : ''}
+         class="link-underline" style="color:var(--contact-text);border-color:#555;font-size:0.9rem;">${esc(uLang.actions.cv)} ${ARROW}</a>` : ''}
     `;
   }
 }

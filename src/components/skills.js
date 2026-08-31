@@ -1,16 +1,40 @@
 /**
- * Capabilities & Certifications Component
+ * Capabilities & Certifications Component with Bilingual Support
  */
 import { qs, esc, ARROW } from '../utils/dom.js';
 
-export function renderSkills(capabilities, certifications) {
+export function renderSkills(capabilities, certifications, ui, lang) {
+  const labelEl = qs('#skills-label');
+  if (labelEl && ui[lang]?.sections?.skillsLabel) {
+    labelEl.textContent = ui[lang].sections.skillsLabel;
+  }
+
+  const titleEl = qs('#skills-title');
+  if (titleEl && ui[lang]?.sections?.skillsTitle) {
+    titleEl.textContent = ui[lang].sections.skillsTitle;
+  }
+
+  const capHeader = qs('#capabilities-header');
+  if (capHeader && ui[lang]?.sections?.capabilities) {
+    capHeader.textContent = ui[lang].sections.capabilities;
+  }
+
+  const certHeader = qs('#certifications-header');
+  if (certHeader && ui[lang]?.sections?.certifications) {
+    certHeader.textContent = ui[lang].sections.certifications;
+  }
+
+  const uLang = ui[lang] || ui.en;
+
   // Capabilities List
   const capList = qs('#capabilities-list');
   if (capList) {
-    capList.innerHTML = capabilities.map((c, i) => `
+    capList.innerHTML = capabilities.map((c) => {
+      const area = c.area[lang] || c.area.en;
+      return `
       <div class="capability-group" style="margin-bottom:1.5rem;">
         <p style="font-family:'DM Serif Display',serif;font-size:1.0625rem;color:var(--charcoal);margin-bottom:0.75rem;">
-          ${esc(c.area)}
+          ${esc(area)}
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
           ${c.items.map((item) => `
@@ -18,7 +42,8 @@ export function renderSkills(capabilities, certifications) {
           `).join('')}
         </div>
       </div>
-    `).join('');
+      `;
+    }).join('');
   }
 
   // Certifications List
@@ -40,7 +65,7 @@ export function renderSkills(capabilities, certifications) {
           <a href="${esc(cert.verify)}" target="_blank" rel="noopener noreferrer"
              class="link-underline"
              style="font-size:0.75rem;color:var(--charcoal);flex-shrink:0;white-space:nowrap;">
-            Verify ${ARROW}
+            ${esc(uLang.actions.verify)} ${ARROW}
           </a>` : ''}
       </div>
     `).join('');
