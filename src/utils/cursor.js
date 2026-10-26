@@ -32,14 +32,17 @@ export function initCursor() {
     requestAnimationFrame(loop);
   })();
 
-  qsa('a, button, .cmd-item').forEach((el) => {
-    el.addEventListener('mouseenter', () => {
+  document.addEventListener('mouseover', (e) => {
+    if (e.target.closest('a, button, .cmd-item, [role="button"]')) {
       dot.classList.add('hovered');
       ring.classList.add('hovered');
-    });
-    el.addEventListener('mouseleave', () => {
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (e.target.closest('a, button, .cmd-item, [role="button"]')) {
       dot.classList.remove('hovered');
       ring.classList.remove('hovered');
-    });
+    }
   });
 }

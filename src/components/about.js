@@ -103,7 +103,7 @@ export function renderAbout({ profile, about, ui, lang }) {
     <div class="about-mini-grid">
       <!-- Education -->
       <div>
-        <p class="meta-tag" style="margin-bottom:0.5rem;">${lang === 'id' ? 'PENDIDIKAN' : 'EDUCATION'}</p>
+        <p class="meta-tag" style="margin-bottom:0.5rem;">${esc(uLang.sections.education || 'Education')}</p>
         <p style="font-family:'DM Serif Display',serif;font-size:0.9375rem;color:var(--charcoal);line-height:1.2;margin-bottom:0.25rem;">
           ${esc(education.institution)}
         </p>
@@ -115,7 +115,7 @@ export function renderAbout({ profile, about, ui, lang }) {
 
       <!-- Currently -->
       <div>
-        <p class="meta-tag" style="margin-bottom:0.5rem;">${lang === 'id' ? 'FOKUS SAAT INI' : 'CURRENTLY'}</p>
+        <p class="meta-tag" style="margin-bottom:0.5rem;">${esc(uLang.sections.currently || 'Currently')}</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.35rem;">
           ${currentFocus.map((f) => `
             <li style="font-size:0.8125rem;color:var(--ink);display:flex;align-items:flex-start;gap:0.4rem;line-height:1.4;">

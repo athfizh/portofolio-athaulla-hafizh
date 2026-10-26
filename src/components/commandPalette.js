@@ -43,18 +43,35 @@ export function initCommandPalette(portfolioData) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
+  let lastActiveElement = null;
+  let activeIndex = 0;
+  let currentFiltered = [];
+
+  function updateActiveHighlight() {
+    const items = qsa('.cmd-item', list);
+    items.forEach((el, i) => {
+      const isActive = i === activeIndex;
+      el.classList.toggle('active', isActive);
+      el.setAttribute('aria-selected', String(isActive));
+      if (isActive) {
+        el.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  }
+
   function renderList(query = '') {
     const actions = buildActions();
     const q = query.toLowerCase().trim();
-    const filtered = actions.filter((a) => a.label.toLowerCase().includes(q) || a.badge.toLowerCase().includes(q));
+    currentFiltered = actions.filter((a) => a.label.toLowerCase().includes(q) || a.badge.toLowerCase().includes(q));
+    activeIndex = 0;
 
-    if (filtered.length === 0) {
+    if (currentFiltered.length === 0) {
       list.innerHTML = `<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:0.8125rem;">${getLang() === 'id' ? 'Perintah tidak ditemukan.' : 'No matching commands found.'}</div>`;
       return;
     }
 
-    list.innerHTML = filtered.map((item, i) => `
-      <div class="cmd-item ${i === 0 ? 'active' : ''}" data-index="${i}">
+    list.innerHTML = currentFiltered.map((item, i) => `
+      <div class="cmd-item ${i === 0 ? 'active' : ''}" role="option" aria-selected="${i === 0}" data-index="${i}">
         <div class="cmd-item-left">
           <span>${esc(item.label)}</span>
         </div>
@@ -63,15 +80,28 @@ export function initCommandPalette(portfolioData) {
     `).join('');
 
     qsa('.cmd-item', list).forEach((el, i) => {
+      el.addEventListener('mouseenter', () => {
+        activeIndex = i;
+        updateActiveHighlight();
+      });
       el.addEventListener('click', () => {
-        filtered[i].action();
-        closeModal();
+        if (currentFiltered[i]) {
+          currentFiltered[i].action();
+          closeModal();
+        }
       });
     });
   }
 
   function openModal() {
+    lastActiveElement = document.activeElement;
     backdrop.classList.add('open');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    const currentLang = getLang();
+    const placeholder = portfolioData.ui[currentLang]?.actions?.cmdPlaceholder || 'Type a command or search section...';
+    input.placeholder = placeholder;
     input.value = '';
     renderList();
     setTimeout(() => input.focus(), 50);
@@ -79,16 +109,52 @@ export function initCommandPalette(portfolioData) {
 
   function closeModal() {
     backdrop.classList.remove('open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+      lastActiveElement.focus();
+      lastActiveElement = null;
+    }
   }
 
   // Keyboard Navigation
   window.addEventListener('keydown', (e) => {
+    const isOpen = backdrop.classList.contains('open');
+
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
-      if (backdrop.classList.contains('open')) closeModal();
+      if (isOpen) closeModal();
       else openModal();
-    } else if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+      return;
+    }
+
+    if (!isOpen) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
       closeModal();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (currentFiltered.length > 0) {
+        activeIndex = (activeIndex + 1) % currentFiltered.length;
+        updateActiveHighlight();
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentFiltered.length > 0) {
+        activeIndex = (activeIndex - 1 + currentFiltered.length) % currentFiltered.length;
+        updateActiveHighlight();
+      }
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentFiltered[activeIndex]) {
+        currentFiltered[activeIndex].action();
+        closeModal();
+      }
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      input.focus();
     }
   });
 

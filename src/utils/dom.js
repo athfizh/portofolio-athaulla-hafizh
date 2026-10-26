@@ -6,7 +6,7 @@ export const ARROW = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none
 
 export function qs(selector, parent = document) {
   const el = parent.querySelector(selector);
-  if (!el && process.env.NODE_ENV !== 'production') {
+  if (!el && import.meta.env.DEV) {
     console.warn(`[DOM] Element not found: ${selector}`);
   }
   return el;

@@ -72,6 +72,7 @@ export function renderProjects(projects, ui, lang) {
                                transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;"
                         onmouseover="this.style.transform='scale(1.03)';this.style.borderColor='var(--charcoal)';"
                         onmouseout="this.style.transform='scale(1)';this.style.borderColor='var(--border)';"
+                        aria-label="${esc(uLang.actions.preview)}: ${esc(caption)}"
                         title="Click to preview: ${esc(caption)}">
                   <img src="${esc(url)}" alt="${esc(p.title)}" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy" />
                   <span style="position:absolute;bottom:3px;right:3px;background:rgba(0,0,0,0.65);color:#fff;

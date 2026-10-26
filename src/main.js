@@ -40,10 +40,6 @@ function renderAll(lang = getLang()) {
   renderSkills(capabilities, certifications, ui, lang);
   renderContact(profile, ui, lang);
   renderFooter(footer.year, ui, lang);
-
-  // Re-attach dynamic element listeners for lightbox and copy buttons
-  initGalleryListeners();
-  initCopyListeners(profile.email);
 }
 
 /**
@@ -52,6 +48,13 @@ function renderAll(lang = getLang()) {
 function bootstrap() {
   const { profile } = portfolioData;
   const initialLang = getLang();
+
+  // C4/C5 fix: sync <html lang> and meta description from stored preference before first render
+  document.documentElement.setAttribute('lang', initialLang);
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && initialLang === 'id') {
+    metaDesc.content = 'Mahasiswa Teknik Informatika, Ketua HMTI Polinema, dan pengembang yang membangun pengalaman digital terstruktur pada web, mobile, dan AI terapan.';
+  }
 
   // 1. Initial Render
   renderAll(initialLang);
@@ -66,9 +69,20 @@ function bootstrap() {
   initLangToggle();
   initCommandPalette(portfolioData);
 
+  // M5/M6 fix: register click-delegation listeners only once at bootstrap,
+  // not on every language switch inside renderAll
+  initGalleryListeners();
+  initCopyListeners(profile.email);
+
   // 3. Subscribe to Language Change
   onLangChange((newLang) => {
     renderAll(newLang);
+    document.documentElement.setAttribute('lang', newLang);
+    if (metaDesc) {
+      metaDesc.content = newLang === 'id'
+        ? 'Mahasiswa Teknik Informatika, Ketua HMTI Polinema, dan pengembang yang membangun pengalaman digital terstruktur pada web, mobile, dan AI terapan.'
+        : 'Informatics Engineering student, Chairman of HMTI Polinema, and developer building clean, purposeful digital experiences across web, mobile, and applied AI.';
+    }
   });
 
   // 4. Initialize Visual Enhancements

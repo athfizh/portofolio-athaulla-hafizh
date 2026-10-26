@@ -3,11 +3,16 @@
  */
 import { qs } from '../utils/dom.js';
 
+let prevActiveElement = null;
+
 export function openLightbox(src, caption) {
   const modal   = qs('#lightbox-modal');
   const imgEl   = qs('#lightbox-img');
   const capEl   = qs('#lightbox-caption');
+  const closeBtn = qs('#lightbox-close');
   if (!modal || !imgEl) return;
+
+  prevActiveElement = document.activeElement;
 
   imgEl.src = src;
   imgEl.alt = caption || 'Documentation Preview';
@@ -16,6 +21,8 @@ export function openLightbox(src, caption) {
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
+
+  if (closeBtn) closeBtn.focus();
 }
 
 export function closeLightbox() {
@@ -24,6 +31,11 @@ export function closeLightbox() {
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+
+  if (prevActiveElement && typeof prevActiveElement.focus === 'function') {
+    prevActiveElement.focus();
+    prevActiveElement = null;
+  }
 }
 
 export function initLightbox() {
@@ -38,8 +50,13 @@ export function initLightbox() {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display !== 'none') {
+    if (modal.style.display === 'none' || modal.getAttribute('aria-hidden') === 'true') return;
+
+    if (e.key === 'Escape') {
       closeLightbox();
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      if (closeBtn) closeBtn.focus();
     }
   });
 }

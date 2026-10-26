@@ -21,7 +21,8 @@ export function renderContact(profile, ui, lang) {
            style="color:var(--contact-text);border-color:var(--contact-text);font-size:0.9rem;">
           ${esc(email)} ${ARROW}
         </a>
-        <button type="button" class="btn-copy-email" data-email="${esc(email)}" title="Copy email address"
+        <button type="button" class="btn-copy-email" data-email="${esc(email)}"
+                aria-label="${esc(uLang.actions.copyEmail)}" title="Copy email address"
                 style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
                        border-radius:4px;color:var(--contact-text);cursor:pointer;padding:3px 8px;font-size:0.75rem;
                        transition:background 0.2s;">

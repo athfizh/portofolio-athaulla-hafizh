@@ -238,7 +238,7 @@
   </footer>
 
   <!-- LIGHTBOX MODAL FOR IMAGES -->
-  <div id="lightbox-modal" class="lightbox-modal" aria-hidden="true">
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image preview" aria-hidden="true">
     <div class="lightbox-content-wrap">
       <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close modal">✕</button>
       <img id="lightbox-img" class="lightbox-img-el" src="" alt="Documentation Preview" />
@@ -261,17 +261,18 @@
   </div>
 
   <!-- Command Palette Modal (Ctrl+K) -->
-  <div id="cmd-backdrop" class="cmd-backdrop" aria-hidden="true">
+  <div id="cmd-backdrop" class="cmd-backdrop" role="dialog" aria-modal="true" aria-label="Command Menu" aria-hidden="true">
     <div class="cmd-modal">
       <div class="cmd-input-wrap">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <label for="cmd-input" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">Type a command or search section</label>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
         <input id="cmd-input" class="cmd-input" type="text" placeholder="Type a command or search section..." autocomplete="off" spellcheck="false" />
-        <span class="cmd-badge">ESC</span>
+        <span class="cmd-badge" aria-hidden="true">ESC</span>
       </div>
-      <div id="cmd-list" class="cmd-list"></div>
+      <div id="cmd-list" class="cmd-list" role="listbox"></div>
     </div>
   </div>
 
